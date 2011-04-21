@@ -1,0 +1,20 @@
+FUEL CMS Modules
+================
+I have created some of the modules for my own freelance work , just share it and open source it, giving back to the FUEL CMS community. There are few more modules in my mind which I going to release it here.
+
+Group Access
+------------
+I remember see the group access feature discussion in the forum , so I build this to allow user set the batch permission easily.
+
+### Installation
+* Setup the mysql db from the install folder
+* Add "group_access" to $config['modules_allowed'] @ /fuel/application/config/My_fuel.php
+* You should see the new "Group Access" option showing @ Manage.
+
+Contributing
+------------
+I m still learning on both FUEL CMS and CodeIgniter , let me know if there are bugs or better way to code.
+
+Thanks to
+---------
+* [daylightstudio ](http://www.thedaylightstudio.com/), for creating FUEL CMS (https://github.com/daylightstudio/FUEL-CMS)
