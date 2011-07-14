@@ -21,8 +21,8 @@ class Groups_model extends Base_module_model {
 		$this->load->module_model(GROUP_ACCESS_FOLDER, 'group_to_permissions_model');
 		
 		$permission_list = $this->permissions_model->options_list('id','name',array('active'=>'yes'));
-		$user_list = $this->users_model->options_list('id','name',array('active'=>'yes'));
-		array_pop($user_list);//remove admin
+		$user_list = $this->users_model->options_list('id','name',array('active'=>'yes','super_admin'=>'no'));
+
 		
 		$permissions=(!empty($values['id'])) ? array_keys($this->group_to_permissions_model->find_all_array_assoc('permission_id', array('group_id' => $values['id']))) : array();
 		$user=(!empty($values['id'])) ?array_keys($this->group_to_users_model->find_all_array_assoc('user_id', array('group_id' => $values['id']))) : array();
