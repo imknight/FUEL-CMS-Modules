@@ -10,7 +10,7 @@ class Group_to_users_model extends Base_module_model {
 	
 	function __construct()
 	{
-		parent::__construct('fuel_group_to_users'); // table name
+		parent::__construct('module_group_to_users'); // table name
 	}
 }
 

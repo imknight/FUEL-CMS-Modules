@@ -1,4 +1,4 @@
-CREATE TABLE `fuel_groups` (
+CREATE TABLE `module_groups` (
   `id` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(50) collate utf8_unicode_ci NOT NULL,
   `description` varchar(255) collate utf8_unicode_ci NOT NULL,
@@ -9,13 +9,13 @@ CREATE TABLE `fuel_groups` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE `fuel_group_to_permissions` (
+CREATE TABLE `module_group_to_permissions` (
   `group_id` int(10) unsigned NOT NULL,
   `permission_id` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`group_id`,`permission_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE `fuel_group_to_users` (
+CREATE TABLE `module_group_to_users` (
   `group_id` int(10) unsigned NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY  (`group_id`,`user_id`)

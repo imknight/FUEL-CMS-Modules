@@ -9,7 +9,7 @@ class Groups_model extends Base_module_model {
 	
 	function __construct()
 	{
-		parent::__construct('fuel_groups'); // table name
+		parent::__construct('module_groups'); // table name
 	}
 	
 	function form_fields($values = array())
@@ -22,7 +22,6 @@ class Groups_model extends Base_module_model {
 		
 		$permission_list = $this->permissions_model->options_list('id','name',array('active'=>'yes'));
 		$user_list = $this->users_model->options_list('id','name',array('active'=>'yes','super_admin'=>'no'));
-
 		
 		$permissions=(!empty($values['id'])) ? array_keys($this->group_to_permissions_model->find_all_array_assoc('permission_id', array('group_id' => $values['id']))) : array();
 		$user=(!empty($values['id'])) ?array_keys($this->group_to_users_model->find_all_array_assoc('user_id', array('group_id' => $values['id']))) : array();
