@@ -6,6 +6,13 @@ Group Access
 ------------
 I remember see the group access feature discussion in the forum , so I build this to allow user set the batch permission easily.
 
+### changelog
+1.1 
+* update the db scheme name
+* added permission to access group access module
+* change the url path name
+
+
 ### Installation
 * Unzip the group_access folder to /fuel/modules/
 * Setup the mysql db from the install folder
