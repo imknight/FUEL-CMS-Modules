@@ -2,6 +2,19 @@ FUEL CMS Modules
 ================
 I have created some of the modules for my own freelance work , just share it and open source it, giving back to the FUEL CMS community. There are few more modules in my mind which I going to release it here.
 
+Flash News
+----------
+I build this module to allow admin flash some news to the user through the notification block
+
+### Installation
+* Unzip and move the flash_news folder to /fuel/modules/
+* Setup the mysql db from the install folder
+* Add "flash_news" to $config['modules_allowed'] @ /fuel/application/config/My_fuel.php
+* Add "flash_news to "$config['dashboards'] @ /fuel/application/config/My_fuel.php
+* Copy the notifications.php from install folder to /modules/fuel/views/_blocks/ and replace the original notifications.php
+* You should see the new "Flash News" option showing @ Manage.
+* There are 2 permission to set , "flash_news/news" to manage the news and "flash_news/view_news" to view the news.
+
 Group Access
 ------------
 I remember see the group access feature discussion in the forum , so I build this to allow user set the batch permission easily.
@@ -14,7 +27,7 @@ I remember see the group access feature discussion in the forum , so I build thi
 
 
 ### Installation
-* Unzip the group_access folder to /fuel/modules/
+* Unzip and move the group_access folder to /fuel/modules/
 * Setup the mysql db from the install folder
 * Add "group_access" to $config['modules_allowed'] @ /fuel/application/config/My_fuel.php
 * You should see the new "Group Access" option showing @ Manage.
