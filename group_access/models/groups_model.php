@@ -15,16 +15,16 @@ class Groups_model extends Base_module_model {
 	function form_fields($values = array())
 	{
 		$fields = parent::form_fields();
-		$this->load->module_model(FUEL_FOLDER, 'permissions_model');
-		$this->load->module_model(FUEL_FOLDER, 'users_model');
+		$this->load->module_model(FUEL_FOLDER, 'fuel_permissions_model');
+		$this->load->module_model(FUEL_FOLDER, 'fuel_users_model');
 		$this->load->module_model(GROUP_ACCESS_FOLDER, 'group_to_users_model');
 		$this->load->module_model(GROUP_ACCESS_FOLDER, 'group_to_permissions_model');
 		
-		$permission_list = $this->permissions_model->options_list('id','name',array('active'=>'yes'));
-		$user_list = $this->users_model->options_list('id','name',array('active'=>'yes','super_admin'=>'no'));
+		$permission_list = $this->fuel_permissions_model->options_list('id','name',array('active'=>'yes'));
+		$user_list = $this->fuel_users_model->options_list('id','name',array('active'=>'yes','super_admin'=>'no'));
 		
 		$permissions=(!empty($values['id'])) ? array_keys($this->group_to_permissions_model->find_all_array_assoc('permission_id', array('group_id' => $values['id']))) : array();
-		$user=(!empty($values['id'])) ?array_keys($this->group_to_users_model->find_all_array_assoc('user_id', array('group_id' => $values['id']))) : array();
+		$user=(!empty($values['id'])) ? array_keys($this->group_to_users_model->find_all_array_assoc('user_id', array('group_id' => $values['id']))) : array();
 		
 		$fields['permissions'] = array('label' => 'Permission', 'type' => 'array', 'options' => $permission_list, 'value' => $permissions, 'mode' => 'multi');
 		$fields['users'] = array('label' => 'Users', 'type' => 'array', 'options' => $user_list, 'value' => $user, 'mode' => 'multi');
@@ -43,13 +43,18 @@ class Groups_model extends Base_module_model {
 		$this->save_related(array(GROUP_ACCESS_FOLDER=>'group_to_users_model'), array('group_id' => $values['id']), array('user_id' => $users));
 		
 		if (!empty($users)){
-			$this->load->module_model(FUEL_FOLDER, 'user_to_permissions_model');
-			foreach($users as $user){
-				$this->user_to_permissions_model->delete(array('user_id' => $user));
-					foreach ($permissions as $permission){
-						$perm_values['permission_id'] = $permission;
-						$perm_values['user_id'] = $user;
-						$this->user_to_permissions_model->save($perm_values);
+            $this->load->module_model(FUEL_FOLDER, 'fuel_relationships_model');
+
+            foreach($users as $user){
+                $this->fuel_relationships_model->delete(array('candidate_table' => 'fuel_users', 'foreign_table' => 'fuel_permissions', 'candidate_key' => $user));
+
+                foreach ($permissions as $permission){
+                    $perm_values=array();
+                    $perm_values['candidate_table'] = 'fuel_users';
+                    $perm_values['foreign_table'] = 'fuel_permissions';
+                    $perm_values['candidate_key'] = $user;
+                    $perm_values['foreign_key'] = $permission;
+                    $this->fuel_relationships_model->save($perm_values);
 					}
 			}
 		}
